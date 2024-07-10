@@ -1,0 +1,17 @@
+service: serverless-flask-container
+
+provider:
+  name: aws
+  ecr:
+    images:
+      test-app:
+        path: ./
+
+functions:
+  app:
+    image:
+      name: test-app
+    timeout: 30
+    events:
+      - http: ANY /
+      - http: 'ANY /{proxy+}'
